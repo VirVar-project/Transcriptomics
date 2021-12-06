@@ -4,4 +4,11 @@ This page will help you with your transcriptome analysis on SAGA. In this main f
 
 For the visualisation of the data you can use the files in the `R_data` folder on your local computer.
 
-You will find a detailed description under the [Wiki](https://github.com/VirVar-project/Transcriptomics/wiki) tab on; commonly used UNIX commands, how to login to NeLS, commonly used commands in SAGA, a step-by-step guide on how to run the analysis, a few notes on R and how to use GIT.
+You will find a detailed description under the [Wiki](https://github.com/VirVar-project/Transcriptomics/wiki) tab on:
+
+1. Commonly used UNIX commands 
+2. How to login to NeLS 
+3. Commonly used commands in SAGA 
+3. A step-by-step guide on how to run the analysis 
+4. A few notes on R 
+5. How to use GIT.
