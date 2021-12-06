@@ -37,3 +37,9 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Project file
+*.Rproj
+
+# Ignore wiki folder
+Transcriptomics.wiki
