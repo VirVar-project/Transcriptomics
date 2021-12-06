@@ -43,3 +43,6 @@ vignettes/*.pdf
 
 # Ignore wiki folder
 Transcriptomics.wiki
+
+# Ignore random file
+.DS_Store
