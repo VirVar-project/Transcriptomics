@@ -10,5 +10,6 @@ You will find a detailed description under the [Wiki](https://github.com/VirVar-
 2. How to login to NeLS 
 3. Commonly used commands in SAGA 
 3. A step-by-step guide on how to run the analysis 
-4. A few notes on R 
-5. How to use GIT.
+4. How to normalize data using DESeq in R
+5. Extract genome sequence using annotated positions in R
+6. How to use GIT.
