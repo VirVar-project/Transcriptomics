@@ -55,8 +55,8 @@ dds <- DESeq(dds) # differential expression using GLM (generalized linear model)
 
 # Examples from the tutorial
 resultsNames(dds) # Based on the design from metadata
-res <- results(dds, name = "Timepoints_13_vs_01") #Pick out specific name, must be from the Names in line above to spot differences, look at pvalue column, can arrange with reOrdered below.
-resLFC <- lfcShrink(dds, coef="Timepoints_13_vs_01", type="apeglm") # log forms data to remove extremes of low/high values
+res <- results(dds, name = "Timepoints_13_vs_0") #Pick out specific name, must be from the Names in line above to spot differences, look at pvalue column, can arrange with reOrdered below.
+resLFC <- lfcShrink(dds, coef="Timepoints_13_vs_0", type="apeglm") # log forms data to remove extremes of low/high values
 resLFC
 
 # We can order our results table by the smallest p value:
@@ -124,8 +124,6 @@ genes_of_interest_2 <-  c(32,556,25,50) # extract specific genes
 
 list_of_plots <-list()
 
-## Add SE instead of keeping replicates
-
 for(i in 1:length(genes_of_interest))
 {
   list_of_plots[[i]]  <- plotCounts(dds, genes_of_interest[i], 
@@ -140,6 +138,36 @@ for(i in 1:length(genes_of_interest))
 ggarrange(plotlist=list_of_plots, ncol = 3, nrow = 3)
 
 # ggsave("top9genes.pdf", width = 15, height = 15)
+
+### ADDING SE TO PLOT
+library(Rmisc)
+p1.1 <- p1 %>% summarySE(measurevar="count", groupvars=c("Timepoints","Treatment"))
+
+ggplot(p1.1 , aes(x=Timepoints, y=count, color = factor(Treatment))) + # Can change Treatment to Replicate
+  geom_point() +
+  geom_errorbar(aes(ymin=count-se, ymax=count+se, color = Treatment), width=.5) +
+  easy_add_legend_title("Treatment") +
+  ggtitle(paste("Gene xxx")) +
+  theme_classic()
+
+### ADDING SE TO MATRIX OF PLOTS
+list_of_plots <-list()
+
+for(i in 1:length(genes_of_interest))
+{
+  list_of_plots[[i]]  <- plotCounts(dds, genes_of_interest[i], 
+                                    intgroup=c("Timepoints","Treatment","Replicates"),
+                                    returnData=TRUE) %>% summarySE(measurevar="count", groupvars=c("Timepoints","Treatment")) %>% 
+    ggplot(aes(x=Timepoints, y=count, color = factor(Treatment))) + 
+    geom_point() +
+    geom_errorbar(aes(ymin=count-se, ymax=count+se, color = Treatment), width=.5) +
+    easy_add_legend_title("Treatment") +
+    ggtitle(paste("Gene",  genes_of_interest[i])) +
+    theme_classic()
+}
+
+ggarrange(plotlist=list_of_plots, ncol = 3, nrow = 3)
+
 
 # WGCNA: weighted gene co-expression network analyses
 ## Can be used to correlate genes.
@@ -179,23 +207,28 @@ library("pheatmap")
 select <- order(rowMeans(counts(dds,normalized=TRUE)), #extract count data
                 decreasing=TRUE)[1:20] #Picking top 20 in row means for particular gene and order it
 
+select.all <- order(rowMeans(counts(dds,normalized=TRUE)), #extract count data
+                decreasing=TRUE)
+
 df <- as.data.frame(colData(dds)[,c("Replicates","Timepoints")])
 
 pheatmap(assay(ntd)[select,], #can also use the object we created earlier "genes_of_interest" (change "select"), this will show most differently expressed genes instead of highest expressed
-         cluster_rows=FALSE, 
+         cluster_rows=FALSE, #Turn on cluster row, can group the genes, maybe include 100s of genes to cluster
          show_rownames=TRUE, #Can be changed to True to show gene names
-         cluster_cols=FALSE, 
+         cluster_cols=FALSE, #Cluster the time points, still almost in the same order, which is really good
+         #kmeans_k = 20,
          annotation_col=df)
 
 
 plotPCA(ntd, intgroup="Timepoints",ntop = 500) #Principal component analyses, can change to Replicate etc
 
-### Redo without the control. I.e. Subset to only virus
 
+
+### Redo without the control. I.e. Subset to only virus
 
 dds_vir <- dds[, dds$Treatment %in% "v"] #Extract only virus transcripts, look for "v" in metadata
 # dds_01_and_14 <- dds[, dds$Timepoints %in% c("01", "14")] # Can also extract specific timepoint
-# If you want to remove the re-infected
+# If you want to remove the resistant culture
 `%notin%` <- Negate(`%in%`)
 dds_vir<-dds_vir[, dds_vir$Timepoints %notin% "ar"] # Removing resistant
 
@@ -212,13 +245,12 @@ ggplot(d, aes(x=Timepoints, y=count)) +
   geom_point(position=position_jitter(w=0.1,h=0.0)) + 
   scale_y_log10(breaks=c(25,100,400))
 
-
 ntd_vir <- normTransform(dds_vir)
 meanSdPlot(assay(ntd_vir))
 pheatmap(assay(ntd_vir)[select,], 
-         cluster_rows=FALSE, #Turn on cluster row, can group the genes, maybe include 100s of genes to cluster
-         show_rownames=TRUE, #Change to False to exclude gene names
-         cluster_cols=FALSE, # Cluster the time points, still almost in the same order, which is really good
+         cluster_rows=FALSE, 
+         show_rownames=TRUE,
+         cluster_cols=FALSE, 
          annotation_col=df)
 # heatscale, normalized counts from DeSeq, which is extracted by first line normTransform(dds_vir)
 # Can take the mean of replicates
