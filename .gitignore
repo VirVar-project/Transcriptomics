@@ -39,7 +39,7 @@ vignettes/*.pdf
 .Renviron
 
 # Project file
-*.Rproj
+*Transcriptomics.Rproj
 
 # Ignore wiki folder
 Transcriptomics.wiki
