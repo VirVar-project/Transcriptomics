@@ -2,9 +2,9 @@
 # 
 # Exampels: 
 
-# if (!requireNamespace("BiocManager", quietly = TRUE))
-# install.packages("BiocManager")
-# BiocManager::install("DESeq2")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+install.packages("BiocManager")
+BiocManager::install(c("DESeq2","tximport","tximportData","tidyverse","ggplot2", "gplots","vsn","IHW","readxl","rhdf5","apeglm"))
 
 # These are the libraries used: 
 library("tximport")
