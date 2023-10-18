@@ -1,7 +1,8 @@
 # See: http://bioconductor.org/help/course-materials/2016/CSAMA/lab-3-rnaseq/rnaseq_gene_CSAMA2016.html
 # On saga: 
 # Ask for interactive computing node:
-#
+# srun --account=nn9845k --mem-per-cpu=10G --time=10:00:00 --cpus-per-task=8 --pty bash -i
+# Start running R:
 # module load R/4.1.2-foss-2021b
 
 
