@@ -1,0 +1,13 @@
+{
+	"n_targets": 1121,
+	"n_bootstraps": 0,
+	"n_processed": 39310868,
+	"n_pseudoaligned": 5101,
+	"n_unique": 4927,
+	"p_pseudoaligned": 0.0,
+	"p_unique": 0.0,
+	"kallisto_version": "0.46.1",
+	"index_version": 10,
+	"start_time": "Tue Nov  2 20:51:25 2021",
+	"call": "kallisto quant -i /cluster/projects/nn9845k/transcriptomics/3_PkVRF01_Pk033/PkVRF01_annotation/PkV-RF01_final_cds -t 16 -o kallisto_results 29-c05cb_S47_L001_R1_001_val_1.fq.gz 29-c05cb_S47_L001_R2_001_val_2.fq.gz"
+}
