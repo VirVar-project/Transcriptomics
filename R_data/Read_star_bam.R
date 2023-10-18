@@ -39,13 +39,15 @@ rownames(fc$counts) <- paste0("gene_",1:nrow(fc$counts))
 
 colnames(fc$counts) <- samples
 
-heatmap(txi.kallisto$counts, Colv=NA, Rowv = NA)
-heatmap(txi.kallisto$counts)
-heatmap(txi.kallisto$abundance, Colv=NA,  Rowv = NA)
+heatmap(fc$counts, Colv=NA, Rowv = NA)
+heatmap(fc$counts)
+heatmap(fc$abundance, Colv=NA,  Rowv = NA)
 
 metadata<-readxl::read_xlsx("Metadata_He028_PkVRF01.xlsx")
 
-### OBS Sample 74 is missing from the STAR output, this is why it did not match with the metadataset!!!!! Check SAGA
+# https://www.biostars.org/p/440379/#440382
+# Needed to add +1 value to the whole matrix, because DESeq gave an error that it could not handle zero values... hmm check into this
+fc$counts <- as.matrix(fc$counts)+1
 
 dds <- DESeqDataSetFromMatrix(fc$counts, 
                               colData = metadata, #metadata[1:9,], 
