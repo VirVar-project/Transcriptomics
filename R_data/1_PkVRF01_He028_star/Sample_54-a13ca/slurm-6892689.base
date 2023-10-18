@@ -1,0 +1,50 @@
+Starting job 6892689 on c2-31 at Fri Sep 30 20:10:47 CEST 2022
+
+###################################################
+# Started: 
+#     Fri Sep 30 20:10:48 CEST 2022
+###################################################
+
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) StdEnv
+GENOME is /cluster/work/users/anderkkr/90_Virvar/03_meta_transcriptome/3_PkVRF01_Pk033/00_genome/PkV-RF01_stardb
+R1 and R2 are:  54-a13ca_S151_L004_R1_001_val_1.fq.gz 54-a13ca_S151_L004_R2_001_val_2.fq.gz
+	STAR --genomeDir /cluster/work/users/anderkkr/90_Virvar/03_meta_transcriptome/3_PkVRF01_Pk033/00_genome/PkV-RF01_stardb --readFilesIn 54-a13ca_S151_L004_R1_001_val_1.fq.gz 54-a13ca_S151_L004_R2_001_val_2.fq.gz --outSAMtype BAM Unsorted --runThreadN 16 --readFilesCommand zcat --outReadsUnmapped Fastx
+	STAR version: 2.7.10a_alpha_220818   compiled: 2022-09-27T10:38:31+0200 login-1.saga.sigma2.no:/cluster/work/users/hrn/build/STAR/2.7.10a_alpha_220818/GCC-10.3.0/STAR-2.7.10a_alpha_220818/source
+Sep 30 20:10:49 ..... started STAR run
+Sep 30 20:10:49 ..... loading genome
+Sep 30 20:10:49 ..... started mapping
+Sep 30 20:20:54 ..... finished mapping
+Sep 30 20:20:54 ..... finished successfully
+
+######################
+Script finished: 
+    Fri Sep 30 20:20:56 CEST 2022
+Running time:
+0d:0h:10m:08s
+######################
+
+Task and CPU usage stats:
+JobID           JobName  AllocCPUS   NTasks     MinCPU MinCPUTask     AveCPU    Elapsed ExitCode 
+------------ ---------- ---------- -------- ---------- ---------- ---------- ---------- -------- 
+6892689            star         16                                             00:10:09      0:0 
+6892689.bat+      batch         16        1   02:25:19          0   02:25:19   00:10:09      0:0 
+6892689.ext+     extern         16        1   00:00:00          0   00:00:00   00:10:09      0:0 
+
+Memory usage stats:
+JobID            MaxRSS MaxRSSTask     AveRSS MaxPages   MaxPagesTask   AvePages 
+------------ ---------- ---------- ---------- -------- -------------- ---------- 
+6892689                                                                          
+6892689.bat+   1636300K          0   1636300K        0              0          0 
+6892689.ext+          0          0          0        0              0          0 
+
+Disk usage stats:
+JobID         MaxDiskRead MaxDiskReadTask    AveDiskRead MaxDiskWrite MaxDiskWriteTask   AveDiskWrite 
+------------ ------------ --------------- -------------- ------------ ---------------- -------------- 
+6892689                                                                                               
+6892689.bat+        9.22M               0          9.22M        0.01M                0          0.01M 
+6892689.ext+        0.00M               0          0.00M            0                0              0 
+
+Job 6892689 completed at Fri Sep 30 20:20:57 CEST 2022
