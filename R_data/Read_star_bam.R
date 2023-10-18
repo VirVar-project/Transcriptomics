@@ -22,28 +22,33 @@ library("Rsubread")
 # when you have multiple bam in a folder (mock-data): 
 
 # files <- list.files("star_bam/Sample_01-a01va/", pattern = "bam", full.names =TRUE)
-files <- list.dirs("star_bam_results") %>% .[-1] %>% file.path(.,"Aligned.out.bam")
+files <- list.dirs("1_PkVRF01_He028_star") %>% .[-1] %>% file.path(.,"Aligned.out.bam")
 
-# samples <- str_remove(files, "/Aligned.out.bam") %>% str_remove("star_bam_results/") #Clean up file, string remove
+# samples <- str_remove(files, "/Aligned.out.bam") %>% str_remove("1_PkVRF01_He028_star/") #Clean up file, string remove
 #names(files) <- samples # Name file after sample
 
 fc <- featureCounts(files,
-                    annot.ext = "star_bam_results/PkV-RF01_final.gtf", 
+                    annot.ext = "1_PkVRF01_He028_star/PkV-RF01_final.gtf", 
                     isGTFAnnotationFile = TRUE,
                     isPairedEnd = TRUE)
 
-samples <- str_remove(files, "/Aligned.out.bam") %>% str_remove("star_bam_results/")
+samples <- str_remove(files, "/Aligned.out.bam") %>% str_remove("1_PkVRF01_He028_star/")
 
 #rownames(fc$counts) <- rownames(dds)
-rownames(fc$counts) <- paste0("gene_",1:nrow(fc2$counts))
+rownames(fc$counts) <- paste0("gene_",1:nrow(fc$counts))
 
 colnames(fc$counts) <- samples
+
+heatmap(txi.kallisto$counts, Colv=NA, Rowv = NA)
+heatmap(txi.kallisto$counts)
+heatmap(txi.kallisto$abundance, Colv=NA,  Rowv = NA)
 
 metadata<-readxl::read_xlsx("Metadata_He028_PkVRF01.xlsx")
 
 ### OBS Sample 74 is missing from the STAR output, this is why it did not match with the metadataset!!!!! Check SAGA
 
-dds<-DESeqDataSetFromMatrix(fc$counts, 
+dds <- DESeqDataSetFromMatrix(fc$counts, 
                               colData = metadata, #metadata[1:9,], 
                               design=~Treatment+Replicates+Timepoints)
 
+dds <- DESeq(dds)
