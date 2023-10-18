@@ -46,3 +46,8 @@ Transcriptomics.wiki
 
 # Ignore random file
 .DS_Store
+
+# Large STAR outputs
+R_data/1_PkVRF01_He028_star
+R_data/3_PkVRF01_Pk033_star
+
