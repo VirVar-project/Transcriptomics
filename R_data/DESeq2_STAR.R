@@ -5,12 +5,26 @@
 # Start running R:
 # module load R/4.1.2-foss-2021b
 
+# Reading bam-files
+
+library("tximport")
+library("DESeq2")
+library("tximportData")
+library("tidyverse")
+library("ggplot2")
+library("gplots")
+library("vsn")
+library("IHW")
+library("readxl")
+library("rhdf5")
+library("apeglm")
 
 # if (!require("BiocManager", quietly = TRUE))
 #   install.packages("BiocManager")
 # BiocManager::install("Rsubread")
 
 library("Rsubread")
+
 # fc <- featureCounts(files = "star_bam/Sample1.bam", 
 #                     annot.ext = "star_bam/PkV-RF01_final.gtf", 
 #                     isGTFAnnotationFile = TRUE,
