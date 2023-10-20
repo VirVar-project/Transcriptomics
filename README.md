@@ -4,7 +4,7 @@ This page will help you with your transcriptome analysis on SAGA. In this main f
 
 For the visualisation of the data you can use the files in the `R_data` folder on your local computer.
 
-You can **download** scripts and R-files by clicking [here](https://github.com/VirVar-project/Transcriptomics/archive/refs/heads/main.zip).
+You can **download** `scripts` and `R-files` by clicking [here](https://github.com/VirVar-project/Transcriptomics/archive/refs/heads/main.zip).
 
 You will find a detailed description under the [Wiki](https://github.com/VirVar-project/Transcriptomics/wiki) tab on:
 
